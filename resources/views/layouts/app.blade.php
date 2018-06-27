@@ -7,7 +7,7 @@
         @show
         <a href="/">[ホーム]</a>
         @if(hasLogin())
-            <a href="">[質問投稿]</a>
+            <a href="questions/create">[質問投稿]</a>
             <a href="logout">[ログアウト]</a>
             {{currentUser()->name}}でログイン中
         @else

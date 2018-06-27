@@ -12,6 +12,6 @@
       <label>password</label>
       <input type="password" name="password"value="">
   </div>
-  <input type="submit" name="ログイン">
+  <input type="submit" value="ログイン">
 </form>
 @endsection
