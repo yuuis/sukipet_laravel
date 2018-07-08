@@ -8,16 +8,24 @@ use App\Models\User;
 use App\Models\Question;
 use App\Models\PasswordAuthentication;
 
-class SessionController extends Controller {
-
-    public function create() {
+class SessionController extends Controller
+{
+    /**
+     * @return view
+     */
+    public function create()
+    {
         return view("sessions.login_form");
     }
-
-    public function store(Request $request) {
+    /**
+     * @param  Request $request [HttpRequest]
+     * @return redirect
+     */
+    public function store(Request $request)
+    {
         $user = User::where("email", $request->input("email"))->first();
         $passwordAuthentication = PasswordAuthentication::where("user_id", $user->id)->first();
-        if($user && $passwordAuthentication && hash("sha512", hash("sha512", $request->input("password"))) === $passwordAuthentication->password_digest) {
+        if ($user && $passwordAuthentication && hash("sha512", hash("sha512", $request->input("password"))) === $passwordAuthentication->password_digest) {
             session(["user_id" => $user->id]);
             $notice = "ログインが完了しました";
             return redirect()->route("root");
@@ -27,7 +35,9 @@ class SessionController extends Controller {
         }
     }
 
-    public function destroy() {
+
+    public function destroy()
+    {
         session(["user_id" => null]);
         return redirect()->route("root");
     }

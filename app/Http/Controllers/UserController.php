@@ -8,7 +8,8 @@ use App\Models\User;
 use App\Models\Question;
 use App\Models\PasswordAuthentication;
 
-class UserController extends Controller {   
+class UserController extends Controller
+{
     protected $users;
 
     /**
@@ -16,7 +17,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         return view("users.create");
     }
 
@@ -26,7 +28,8 @@ class UserController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $inputs = $request->all();
         $rules = [
             "name" => "required|max:20",
@@ -41,7 +44,7 @@ class UserController extends Controller {
             "password.required" => "パスワードを入力してください",
         ];
         $validator = Validator::make($inputs, $rules, $messages);
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return back()->withErrors($validator)->withinput();
         } else {
             $user = new User();
@@ -50,19 +53,19 @@ class UserController extends Controller {
                 "email" => $request->input("email"),
             ];
             $user->fill($form);
-            if($user->save()) {
+            if ($user->save()) {
                 $passwordAuthentication = new PasswordAuthentication;
                 $formPassword = [
                     "password_digest" => hash("sha512", hash("sha512", $request->input("password"))),
                     "user_id" => $user->id,
                 ];
                 $passwordAuthentication->fill($formPassword);
-                if($passwordAuthentication->save()) {
+                if ($passwordAuthentication->save()) {
                     session(["user_id" => $user->id]);
                     return redirect()->route("root");
                 }
             } else {
-               return back()->withinput();
+                return back()->withinput();
             }
         }
     }

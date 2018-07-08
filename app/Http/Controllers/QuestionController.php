@@ -15,7 +15,8 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         $category = Category::all();
         return view("questions.create", compact("category"));
     }
@@ -26,7 +27,8 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $inputs = $request->all();
         $rules = [
             "title" => "required|max:100",
@@ -41,7 +43,7 @@ class QuestionController extends Controller
             "category.required" => "カテゴリを選択してください",
         ];
         $validator = Validator::make($inputs, $rules, $messages);
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return back()->withErrors($validator)->withinput();
         } else {
             $question = new Question();
@@ -53,12 +55,11 @@ class QuestionController extends Controller
                 "user_id" => currentUser()->id,
             ];
             $question->fill($form);
-            if($question->save()) {
+            if ($question->save()) {
                 return redirect()->route("root");
             } else {
-               return back()->withinput();
+                return back()->withinput();
             }
         }
     }
-
 }
