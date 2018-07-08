@@ -8,7 +8,7 @@
         <a href="/">[ホーム]</a>
         @if(hasLogin())
             <a href="questions/create">[質問投稿]</a>
-            <a href="logout">[ログアウト]</a>
+            <a href="/logout">[ログアウト]</a>
             {{currentUser()->name}}でログイン中
         @else
             <a href="/users/create">[ユーザ登録]</a>

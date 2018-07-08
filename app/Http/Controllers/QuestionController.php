@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Question;
+use App\Models\Answer;
+use App\Models\Message;
+use App\Models\User;
 use Validator;
 
 class QuestionController extends Controller
@@ -61,5 +64,24 @@ class QuestionController extends Controller
                 return back()->withinput();
             }
         }
+    }
+
+    public function show($question)
+    {
+        $return["question"] = Question::where("id", $question)->first();
+        $return["category"] = Category::where("id", $return["question"]->category_id)->first();
+        $return["answers"] = Answer::where("question_id", $return["question"]->id)->get();
+        $return["user"] = User::where("id", $return["question"]->user_id)->first();
+        $return["users"] = array();
+        $messages = array();
+        foreach ($return["answers"] as $answer) {
+            array_push($messages, Message::where("answer_id", $answer->id)->get());
+        }
+        $return["messages"] = $messages;
+        foreach ($return["messages"] as $message) {
+            $return["users"][$message->id] = User::where("id", $message->user_id)->get();
+        }
+
+        return view("questions.show", compact("return"));
     }
 }
