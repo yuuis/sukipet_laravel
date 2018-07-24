@@ -35,7 +35,6 @@ class SessionController extends Controller
         }
     }
 
-
     public function destroy()
     {
         session(["user_id" => null]);

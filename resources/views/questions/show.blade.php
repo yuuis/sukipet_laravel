@@ -15,7 +15,6 @@
     回答:
     <div style="border-style: solid ; border-width: 1px;">
       @foreach($return["messages"] as $message)
-        <% if message.answer_id == answer.id %>
         @if($message->answer_id === $answer->id)
           {{ $message->body }}
           {{ $return["users"][$message->id]->name }}さん<br>

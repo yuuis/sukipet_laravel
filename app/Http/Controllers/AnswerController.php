@@ -15,7 +15,9 @@ class AnswerController extends Controller
      */
     public function create()
     {
+        return view("message.create");
     }
+    
     /**
      * @param  Request $request [HttpRequest]
      * @return redirect
