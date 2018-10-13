@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $fillable= array("title","body", "category_id", "status", "user_id");
+    protected $fillable = array("title","body", "category_id", "status", "user_id");
 }

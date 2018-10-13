@@ -17,9 +17,9 @@ Route::resource("users", "UserController", ["only" => ["create", "store"]]);
 Route::resource("questions", "QuestionController", ["only" => ["create", "store", "show"]]);
 
 # sessions
-Route::get("/login", "SessionController@create");
+Route::get("/login", ["as" => "login", "uses" =>  "SessionController@create"]);
 Route::post("/login", "SessionController@store");
-Route::get("/logout", "SessionController@destroy");
+Route::get("/logout", ["as" => "logout", "uses" => "SessionController@destroy"]);
 
 # answers
 Route::get("/questions/:question_id/messages/create", ["as" => "answers.create", "uses" => "AnswerController@create"]);

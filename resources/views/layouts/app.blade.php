@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>SUKIPET - @yield('title')</title>
+        <meta name="csrf-token" href="{{mix('/css/app.css')}}">
     </head>
     <body>
         @section('sidebar')
@@ -24,5 +25,9 @@
         <div class="container">
             @yield('content')
         </div>
+        <div id="app">
+            <example-component></example-component>
+        </div>
+        <script src="{{mix('/js/app.js')}}"></script>
     </body>
 </html>

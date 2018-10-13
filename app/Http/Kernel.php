@@ -21,6 +21,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrustProxies::class,
         \App\Http\Middleware\Before::class,
         \App\Http\Middleware\After::class,
+        \App\Http\Middleware\ResponseHeader::class,
     ];
 
     /**
