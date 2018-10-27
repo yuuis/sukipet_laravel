@@ -45,7 +45,7 @@ class UserController extends Controller
         ];
         $validator = Validator::make($inputs, $rules, $messages);
         if ($validator->fails()) {
-            return back()->withErrors($validator)->withinput();
+            return back()->withErrors($validator)->withInput();
         } else {
             $user = new User();
             $form = [
